@@ -1,0 +1,6 @@
+[tests]
+[tests]
+script.singlecamera.MyTest.testCaptureSingleImageWithFlashOn = 1
+script.singlecamera.MyTest.testCaptureSingleImageWithFlashOff = 1
+script.singlecamera.MyTest.testCaptureSingleImageWithFlashAuto = 1
+
