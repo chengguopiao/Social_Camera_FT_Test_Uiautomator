@@ -120,7 +120,7 @@ class Adb():
         else:
             raise Exception('commands is unsupported,only support [push,pull,cat,refresh,ls,launch,rm] now')
 
-    def _reserApp(self,path):
+    def _resetApp(self,path):
         p = self._shellcmd('pm clear ' + path)
         return p        
 

@@ -28,6 +28,7 @@ class MyTest(unittest.TestCase):
     def tearDown(self):
         #4.Exit  activity
         self._pressBack(4)
+        A.cmd('pm','com.intel.camera22')
         super(MyTest,self).tearDown()
 
     # Testcase 1
