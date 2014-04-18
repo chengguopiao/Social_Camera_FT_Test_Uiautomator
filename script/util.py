@@ -44,6 +44,8 @@ VIDEO_SETTING       = ['testcamera','location','videosize','exposure','whitebala
 BURST_SETTING       = ['location','picturesize','sencesmode','exposure']
 PERFECTSHOT_SETTING = ['location','scencesmode','exposure']
 PANORAMA_SETTING    = ['location','exposure','iso']
+SINGLE_SETTING_FRONT= ['location']
+VIDEO_SETTING_FRONT = ['location']
 
 
 MODE = {'single':SINGLE_SETTING,
@@ -52,7 +54,9 @@ MODE = {'single':SINGLE_SETTING,
         'video':VIDEO_SETTING,
         'burst':BURST_SETTING,
         'perfectshot':PERFECTSHOT_SETTING,
-        'panorama':PANORAMA_SETTING
+        'panorama':PANORAMA_SETTING,
+        'fsingle':SINGLE_SETTING_FRONT,
+        'fvideo':VIDEO_SETTING_FRONT
         }
 
 
@@ -105,7 +109,8 @@ class Adb():
         'ls':self._getFileNumber,
         'cat':self._catFile,
         'launch':self._launchActivity,
-        'rm':self._deleteFile
+        'rm':self._deleteFile,
+        'pm':self._resetApp
         }
         action2=['pull','push']
         if action in action1:
@@ -114,6 +119,10 @@ class Adb():
             return self._pushpullFile(action,path,t_path)
         else:
             raise Exception('commands is unsupported,only support [push,pull,cat,refresh,ls,launch,rm] now')
+
+    def _reserApp(self,path):
+        p = self._shellcmd('pm clear ' + path)
+        return p        
 
     def _refreshMedia(self,path):
         p = self._shellcmd('am broadcast -a android.intent.action.MEDIA_MOUNTED -d file://' + path)
@@ -276,11 +285,10 @@ class TouchButton():
         # Start record video
         d(resourceId = CPTUREBUTTON_RESOURCEID).click.wait() 
         # Set recording time
-        time.sleep(string.atoi(status) - string.atoi('2'))
+        time.sleep(status - 2)
         #Stop record video
         d(resourceId = CPTUREBUTTON_RESOURCEID).click.wait() 
         return True
-
 
     def switchBackOrFrontCamera(self,status):
         #Dictionary
