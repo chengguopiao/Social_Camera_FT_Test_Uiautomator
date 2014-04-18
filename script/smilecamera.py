@@ -21,6 +21,11 @@ class MyTest(unittest.TestCase):
         #Step 1. Launch smile capture activity
         A.cmd('launch','com.intel.camera22/.Camera')
         time.sleep(2)
+        try:
+            assert d(text = 'OK').wait.exists(timeout = 3000)
+            d(text = 'OK').click.wait()
+        except:
+            pass
         assert d(resourceId = 'com.intel.camera22:id/shutter_button'),'Launch camera failed!!'
         SM.switchcamera('smile')
         super(MyTest,self).setUp()
