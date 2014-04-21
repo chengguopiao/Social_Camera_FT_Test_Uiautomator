@@ -608,10 +608,10 @@ class MyTest(unittest.TestCase):
             if result.find(option) == -1:
                 self.fail('set camera setting ' + sub_mode + ' to ' + option + ' failed')
 
-    def _capturePictureAndConfirm(self,timer=None):
+    def _capturePictureAndConfirm(self,timer=0):
         beforeC = A.cmd('ls','/sdcard/DCIM/100ANDRO')
         TB.takePicture('single')
-        time.sleep(timer)       
+        time.sleep(timer)
         afterC  = A.cmd('ls','/sdcard/DCIM/100ANDRO')
         if afterC == beforeC:
             self.fail('take picture failed !!')
