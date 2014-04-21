@@ -23,7 +23,7 @@ MODE_ID             ={'single':'com.intel.camera22:id/mode_wave_photo',
                       'hdr':'com.intel.camera22:id/mode_wave_hdr',
                       'video':'com.intel.camera22:id/mode_wave_video',
                       'burstfast':'com.intel.camera22:id/mode_wave_burst',
-                      #'burstslow':'com.intel.camera22:id/mode_wave_burst',
+                      'burstslow':'com.intel.camera22:id/mode_wave_burst',
                       'perfectshot':'com.intel.camera22:id/mode_wave_perfectshot',
                       'panorama':'com.intel.camera22:id/mode_wave_panorama'
                       }
@@ -202,12 +202,20 @@ class SetMode():
     
     def switchcamera(self,mode):
         d(resourceId = MODE_LIST_BUTTON).click.wait()
+        try:
+            assert d(resourceId = 'com.intel.camera22:id/mode_wave_smile')
+            self._touchmode(mode)
+        except:
+            d(resourceId = 'com.intel.camera22:id/mode_wave_photo').click()
+            self._touchmode(mode)
+
+    def _touchmode(self,mode):
         if mode == 'burstslow':
             d(resourceId = MODE_ID[mode]).click.wait()
-            d(text = 'SLOW'),click.wait()
+            d(text = 'SLOW').click.wait()
         elif mode == 'burstfast':
             d(resourceId = MODE_ID[mode]).click.wait()
-            d(text = 'FAST').click.wait() 
+            d(text = 'FAST').click.wait()
         else:
             d(resourceId = MODE_ID[mode]).click.wait()
 
