@@ -12,29 +12,28 @@ TB = util.TouchButton()
 
 SINGLE_SETTING = ()
 
-class MyTest(unittest.TestCase):
+class CameraTest(unittest.TestCase):
 
     def setUp(self):
+        super(CameraTest,self).setUp()
         # rm DCIM folder and refresh from adb shell
         A.cmd('rm','/sdcard/DCIM/100ANDRO')
         A.cmd('refresh','/sdcard/DCIM/100ANDRO')
-        #Step 1. Launch smile capture activity
+        #Because default camera after launching is single mode, so we set this step in setUp().
+        #Step 1. Launch single capture activity
         A.cmd('launch','com.intel.camera22/.Camera')
         time.sleep(2)
-        try:
-            assert d(text = 'OK').wait.exists(timeout = 3000)
+        if  d(text = 'OK').wait.exists(timeout = 3000):
             d(text = 'OK').click.wait()
-        except:
-            pass
-        assert d(resourceId = 'com.intel.camera22:id/shutter_button'),'Launch camera failed!!'
-        SM.switchcamera('smile')
-        super(MyTest,self).setUp()
+        else:
+            assert d(resourceId = 'com.intel.camera22:id/shutter_button'),'Launch camera failed!!'
+
 
     def tearDown(self):
+        super(CameraTest,self).tearDown()
         #4.Exit  activity
         self._pressBack(4)
         A.cmd('pm','com.intel.camera22')
-        super(MyTest,self).tearDown()
 
     # Testcase 1
     def testCaptureSmileImageWithFlashOn(self):

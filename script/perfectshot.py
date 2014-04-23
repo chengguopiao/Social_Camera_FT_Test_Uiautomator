@@ -300,8 +300,3 @@ class CameraTest(unittest.TestCase):
     def _pressBack(self,touchtimes):
         for i in range(1,touchtimes+1):
             d.press('back')
-
-
-
-if __name__ =='__main__':  
-    unittest.main()             
