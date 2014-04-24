@@ -289,15 +289,18 @@ class TouchButton():
 
 
 
-    def takeVideo(self,status):
+    def takeVideo(self,status,capturetimes=0):
         # Start record video
         d(resourceId = CPTUREBUTTON_RESOURCEID).click.wait() 
-        # Set recording time
-        time.sleep(status - 2)
-        #Stop record video
+        for i in range(0,capturetimes):
+            #Tap on the center of the screen to capture image during taking video
+            d(resourceId = 'com.intel.camera22:id/camera_preview').click.wait()
+        # Set recording time, every capturing during record video takes about 3s
+        time.sleep(status - capturetimes*3 -2)
+        # Stop record video
         d(resourceId = CPTUREBUTTON_RESOURCEID).click.wait() 
         return True
-
+        
     def switchBackOrFrontCamera(self,status):
         #Dictionary
         camerastatus = {'back': '0','front':'1'}  

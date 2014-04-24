@@ -19,7 +19,7 @@ tb = util.TouchButton()
 
 # PATH
 PATH ='/data/data/com.intel.camera22/shared_prefs/com.intel.camera22_preferences_0_0.xml '
-
+PATH1='cat /data/data/com.intel.camera22/shared_prefs/com.intel.camera22_preferences_0.xml '
 # key
 EXPOSURE_KEY ='| grep pref_camera_exposure_key'
 IOS_KEY='| grep pref_camera_iso_key'
@@ -261,7 +261,7 @@ class CameraTest(unittest.TestCase):
 
         # step 2
         sm.setCameraSetting('perfectshot',1,2)
-        assert bool(a.cmd('cat',PATH + LOCATION_KEY).find('on')+1)
+        assert bool(a.cmd('cat',PATH1 + LOCATION_KEY).find('on')+1)
         # step 3
         self._checkCapturedPic()
 
@@ -277,7 +277,7 @@ class CameraTest(unittest.TestCase):
 
         # step 2
         sm.setCameraSetting('perfectshot',1,1)
-        assert bool(a.cmd('cat',PATH + LOCATION_KEY).find('off')+1)
+        assert bool(a.cmd('cat',PATH1 + LOCATION_KEY).find('off')+1)
         # step 3
         self._checkCapturedPic()
 
