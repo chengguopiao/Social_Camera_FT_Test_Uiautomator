@@ -36,11 +36,11 @@ class CameraTest(unittest.TestCase):
     def setUp(self):
         super(CameraTest,self).setUp()
         # rm DCIM folder and refresh from adb shell
-        A.cmd('rm','/sdcard/DCIM/100ANDRO')
-        A.cmd('refresh','/sdcard/DCIM/100ANDRO')
+        a.cmd('rm','/sdcard/DCIM/100ANDRO')
+        a.cmd('refresh','/sdcard/DCIM/100ANDRO')
         #Because default camera after launching is single mode, so we set this step in setUp().
         #Step 1. Launch single capture activity
-        A.cmd('launch','com.intel.camera22/.Camera')
+        a.cmd('launch','com.intel.camera22/.Camera')
         time.sleep(2)
         if  d(text = 'OK').wait.exists(timeout = 3000):
             d(text = 'OK').click.wait()
@@ -54,7 +54,7 @@ class CameraTest(unittest.TestCase):
         super(CameraTest,self).tearDown()
         #4.Exit  activity
         self._pressBack(4)
-        A.cmd('pm','com.intel.camera22')
+        a.cmd('pm','com.intel.camera22')
 
 
 
