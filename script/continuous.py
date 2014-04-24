@@ -337,7 +337,7 @@ class CameraTest(unittest.TestCase):
         """ 
         # step 2
         sm.setCameraSetting('single',3,1)
-        assert bool(a.cmd('cat',PATH + LOCATION_KEY).find('on')+1)
+        assert bool(a.cmd('cat',PATH1 + LOCATION_KEY).find('on')+1)
         # step 3
         self._ContinuouCapturePic()          
 
@@ -352,7 +352,7 @@ class CameraTest(unittest.TestCase):
         """
         # step 2
         sm.setCameraSetting('single',3,2)
-        assert bool(a.cmd('cat',PATH + LOCATION_KEY).find('off')+1)
+        assert bool(a.cmd('cat',PATH1 + LOCATION_KEY).find('off')+1)
         # step 3
         self._ContinuouCapturePic()   
 
