@@ -34,6 +34,12 @@ script.singlecamera.CameraTest.testCaptureSingleImageWithWBIncandescent = 1
 script.singlecamera.CameraTest.testCaptureSingleImageWithWBDaylight = 1
 script.singlecamera.CameraTest.testCaptureSingleImageWithWBFluorescent = 1
 script.singlecamera.CameraTest.testCaptureSingleImageWithWBCloudy = 1
+script.singlecamera.CameraTest.testCaptureSingleImageWithLocationOn = 1
+script.singlecamera.CameraTest.testCaptureSingleImageWithLocationOff = 1
+script.singlecamera.CameraTest.testFrontCaptureSingleImageWithLocationOn = 1
+script.singlecamera.CameraTest.testFrontCaptureSingleImageWithLocationOff = 1
+script.singlecamera.CameraTest.testFrontCaptureSingleImageWithFDFROn = 1
+script.singlecamera.CameraTest.testFrontCaptureSingleImageWithFDFROff = 1
 
 script.smilecamera.CameraTest.testCaptureSmileImageWithFlashOn = 1
 script.smilecamera.CameraTest.testCaptureSmileImageWithFlashOff = 1
