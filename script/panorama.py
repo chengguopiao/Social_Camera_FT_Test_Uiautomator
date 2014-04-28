@@ -46,17 +46,12 @@ class CameraTest(unittest.TestCase):
         else:
             assert d(resourceId = 'com.intel.camera22:id/shutter_button'),'Launch camera failed!!'
         sm.switchcamera('panorama')
-        time.sleep(1)
-        d.expect('panorama.png')    
-
 
     def tearDown(self):
         super(CameraTest,self).tearDown()
         #4.Exit  activity
         self._pressBack(4)
         a.cmd('pm','com.intel.camera22')
-
-
 
 ### Panorama capture 12 ###
 # Test case 1

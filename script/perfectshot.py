@@ -47,8 +47,6 @@ class CameraTest(unittest.TestCase):
         else:
             assert d(resourceId = 'com.intel.camera22:id/shutter_button'),'Launch camera failed!!'
         sm.switchcamera('perfectshot')
-        time.sleep(1)
-        d.expect('perfectshot.png')
 
     def tearDown(self):
         super(CameraTest,self).tearDown()
