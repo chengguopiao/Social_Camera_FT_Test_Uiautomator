@@ -10,7 +10,6 @@ A  = util.Adb()
 SM = util.SetMode()
 TB = util.TouchButton()
 
-SINGLE_SETTING = ()
 
 class CameraTest(unittest.TestCase):
 

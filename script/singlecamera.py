@@ -10,7 +10,6 @@ A  = util.Adb()
 SM = util.SetMode()
 TB = util.TouchButton()
 
-
 class CameraTest(unittest.TestCase):
 
     def setUp(self):
