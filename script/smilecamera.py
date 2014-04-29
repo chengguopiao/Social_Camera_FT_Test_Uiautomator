@@ -238,7 +238,7 @@ class CameraTest(unittest.TestCase):
         4.Exit  activity
         """
         # Step 2  Set scene mode Portrait
-        SM.setCameraSetting('smile',5,3)
+        SM.setCameraSetting('smile',3,3)
         self._confirmSettingMode('scenemode','portrait')
         # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
         self._capturePictureAndConfirm(2)
@@ -254,7 +254,7 @@ class CameraTest(unittest.TestCase):
         4.Exit  activity
         """
         # Step 2  Set scene mode NightPortrait
-        SM.setCameraSetting('smile',5,2)
+        SM.setCameraSetting('smile',3,2)
         self._confirmSettingMode('scenemode','night-portrait')
         # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
         self._capturePictureAndConfirm(2)
@@ -270,7 +270,7 @@ class CameraTest(unittest.TestCase):
         4.Exit  activity
         """
         # Step 2  Set scene mode barcode
-        SM.setCameraSetting('smile',5,1)
+        SM.setCameraSetting('smile',3,1)
         self._confirmSettingMode('scenemode','barcode')
         # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
         self._capturePictureAndConfirm(2)
@@ -287,7 +287,7 @@ class CameraTest(unittest.TestCase):
         """
         # Step 2  Set photo size 6M
         SM.setCameraSetting('smile',2,1)
-        self._confirmSettingMode('picturesize','WideScreen')
+        self._confirmSettingMode('picture_size','WideScreen')
         # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
         self._capturePictureAndConfirm(2)
 
@@ -303,7 +303,7 @@ class CameraTest(unittest.TestCase):
         """
         # Step 2  Set photo size 13M
         SM.setCameraSetting('smile',2,2)
-        self._confirmSettingMode('picturesize','StandardScreen')
+        self._confirmSettingMode('picture_size','StandardScreen')
         # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
         self._capturePictureAndConfirm(2)
 
