@@ -19,7 +19,7 @@ tb = util.TouchButton()
 
 # PATH
 PATH ='/data/data/com.intel.camera22/shared_prefs/com.intel.camera22_preferences_0_0.xml '
-PATH1='cat /data/data/com.intel.camera22/shared_prefs/com.intel.camera22_preferences_0.xml '
+PATH1='/data/data/com.intel.camera22/shared_prefs/com.intel.camera22_preferences_0.xml '
 # key
 EXPOSURE_KEY ='| grep pref_camera_exposure_key'
 IOS_KEY='| grep pref_camera_iso_key'
@@ -351,7 +351,7 @@ class CameraTest(unittest.TestCase):
                 4.Exit  activity
         """
         # step 2
-        sm.setCameraSetting('single',3,2)
+        sm.setCameraSetting('single',3,1)
         assert bool(a.cmd('cat',PATH1 + LOCATION_KEY).find('off')+1)
         # step 3
         self._ContinuouCapturePic()   
@@ -562,7 +562,7 @@ class CameraTest(unittest.TestCase):
                 4.Exit  activity
         """
         sm.setCameraSetting('single',7,2)
-        assert bool(a.cmd('cat',PATH + WHITEBALANCE).find('daylight')+1)
+        assert bool(a.cmd('cat',PATH + WHITEBALANCE).find('fluorescent')+1)
         # step 3
         self._ContinuouCapturePic() 
 
@@ -589,13 +589,14 @@ class CameraTest(unittest.TestCase):
                 3.Touch shutter button to capture picture
                 4.Exit  activity
         """
-        sm.setCameraSetting('single','fdfr','off')
+        tb.switchBackOrFrontCamera('front')
+        sm.setCameraSetting('fsingle','fdfr','off')
         assert bool(a.cmd('cat',PATH1 + FDFR_KEY).find('off')+1)
         # step 3
         self._ContinuouCapturePic() 
 
 # Test case 38
-    def testCapturePictureWithFDON(self):
+    def testFrontCapturePictureWithFDON(self):
         """
         Summary:testCapturePictureWithFDON: Take a picture with set FD/FR on
         Steps:  1.Launch single capture activity
@@ -603,7 +604,8 @@ class CameraTest(unittest.TestCase):
                 3.Touch shutter button to capture picture
                 4.Exit  activity
         """
-        sm.setCameraSetting('single','fdfr','on')
+        tb.switchBackOrFrontCamera('front')
+        sm.setCameraSetting('fsingle','fdfr','on')
         assert bool(a.cmd('cat',PATH1 + FDFR_KEY).find('on')+1)
         # step 3
         self._ContinuouCapturePic() 
