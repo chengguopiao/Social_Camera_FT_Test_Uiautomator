@@ -334,7 +334,7 @@ class CameraTest(unittest.TestCase):
         4.Exit  activity
         """
         # Step 2 Set Ge0-tag OFF.
-        SM.setCameraSetting('smile',3,1)
+        SM.setCameraSetting('smile',1,1)
         self._confirmSettingMode('location','off')
         # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
         self._capturePictureAndConfirm()

@@ -83,7 +83,7 @@ class CameraTest(unittest.TestCase):
 
         # step 2
         sm.setCameraSetting('panorama',2,4)
-        assert bool((a.cmd('cat',PATH + EXPOSURE_KEY).find('3')+1)
+        assert bool(a.cmd('cat',PATH + EXPOSURE_KEY).find('3')+1)
         # step 4~5
         self._PanoramaCapturePic()
 

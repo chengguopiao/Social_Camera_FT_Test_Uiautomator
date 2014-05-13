@@ -277,7 +277,6 @@ class CameraTest(unittest.TestCase):
         """
         # step 2
         sm.setCameraSetting('single',5,5)
-        assert bool(a.cmd('cat',PATH + SCENE_KEY).find('night')+1)
         # step 3
         self._ContinuouCapturePic()
 
@@ -410,7 +409,7 @@ class CameraTest(unittest.TestCase):
         sm.setCameraSetting('single',9,2)
         assert bool(a.cmd('cat',PATH + TIMER_KEY).find('3')+1)
         # step 3
-        self._ContinuouCapturePic() 
+        self._CapturePic() 
 
 # Test case 25
     def testContinuousCapturepictureWithSelfTimerFiveSec(self):
@@ -424,7 +423,7 @@ class CameraTest(unittest.TestCase):
         sm.setCameraSetting('single',9,3)
         assert bool(a.cmd('cat',PATH + TIMER_KEY).find('5')+1)
         # step 3
-        self._ContinuouCapturePic() 
+        self._CapturePic() 
 
 # Test case 26
     def testContinuousCapturepictureWithSelfTimerTenSec(self):
@@ -438,7 +437,7 @@ class CameraTest(unittest.TestCase):
         sm.setCameraSetting('single',9,4)
         assert bool(a.cmd('cat',PATH + TIMER_KEY).find('10')+1)
         # step 3
-        self._ContinuouCapturePic() 
+        self._CapturePic() 
 
 # Test case 27
     def testContinuousCapturepictureWithISOAuto(self):
@@ -645,6 +644,15 @@ class CameraTest(unittest.TestCase):
         afterNo = a.cmd('ls','/sdcard/DCIM/100ANDRO') #Get count after taking picture
         if beforeNo == afterNo: #If the count does not raise up after capturing, case failed
             self.fail('Taking picture failed!')
+
+    def _CapturePic(self):
+        beforeNo = a.cmd('ls','/sdcard/DCIM/100ANDRO') #Get count before capturing
+        tb.takePicture('single')
+        time.sleep(10)
+        afterNo = a.cmd('ls','/sdcard/DCIM/100ANDRO') #Get count after taking picture
+        if beforeNo == afterNo: #If the count does not raise up after capturing, case failed
+            self.fail('Taking picture failed!')
+
 
 
     def _launchCamera(self):
