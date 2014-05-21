@@ -74,6 +74,8 @@ class CameraTest(unittest.TestCase):
         #Launch social camera
         self._launchCamera()
         SM.switchcamera('video')
+        time.sleep(1)
+
 
     def tearDown(self):
     	AD.cmd('pm','com.intel.camera22') #Force reset the camera settings to default
@@ -141,6 +143,7 @@ class CameraTest(unittest.TestCase):
                 3.Touch shutter button to capture 30s video
                 4.Exit  activity
         '''
+
         SM.setCameraSetting('video',5,3)
         assert bool(AD.cmd('cat',WBALANCE_STATE).find('incandescent')+1)
         self._takeVideoAndCheckCount()
@@ -154,6 +157,7 @@ class CameraTest(unittest.TestCase):
                 3.Touch shutter button to capture 30s video
                 4.Exit  activity
         '''
+
         SM.setCameraSetting('video',5,2)
         assert bool(AD.cmd('cat',WBALANCE_STATE).find('fluorescent')+1)
         self._takeVideoAndCheckCount()
@@ -250,6 +254,7 @@ class CameraTest(unittest.TestCase):
                 3.Touch shutter button to capture 30s video
                 4.Exit  activity 
         '''
+
         SM.setCameraSetting('video',3,3)
         # Need two check point due to the same value for video size when set HS/HD
         assert bool(AD.cmd('cat',VIDEOSIZE_STATE).find('5')+1)
@@ -265,6 +270,7 @@ class CameraTest(unittest.TestCase):
                 3.Touch shutter button to capture 30s video
                 4.Exit  activity 
         '''
+
         SM.setCameraSetting('video',3,2)
         # Need two check point due to the same value for video size when set HS/HD
         assert bool(AD.cmd('cat',VIDEOSIZE_STATE).find('5')+1)
@@ -352,7 +358,7 @@ class CameraTest(unittest.TestCase):
                 5.Exit  activity
         '''
         TB.switchBackOrFrontCamera('front')
-        SM.setCameraSetting('fvideo',1,1)
+        SM.setCameraSetting('fvideo',1,2)
         assert bool(AD.cmd('cat',GEO_STATE).find('on')+1)
         self._takeVideoAndCheckCount()
 
@@ -367,7 +373,8 @@ class CameraTest(unittest.TestCase):
                 5.Exit  activity
         '''
         TB.switchBackOrFrontCamera('front')
-        SM.setCameraSetting('fvideo',1,2)
+        SM.setCameraSetting('fvideo',1,1)
+        time.sleep(1)
         assert bool(AD.cmd('cat',GEO_STATE).find('off')+1)
         self._takeVideoAndCheckCount()
 

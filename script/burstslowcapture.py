@@ -221,7 +221,7 @@ class CameraTest(unittest.TestCase):
         '''
         SM.setCameraSetting('burst',3,2)
         assert bool(AD.cmd('cat',SCENE_STATE).find('night-portrait')+1)
-        self._captureAndCheckPicCount('single',5)
+        self._captureAndCheckPicCount('single',10)
 
     def testCapturePictureWithScenesBarcode(self):
         '''
@@ -234,7 +234,7 @@ class CameraTest(unittest.TestCase):
         '''
         SM.setCameraSetting('burst',3,1)
         assert bool(AD.cmd('cat',SCENE_STATE).find('barcode')+1)
-        self._captureAndCheckPicCount('single',5)
+        self._captureAndCheckPicCount('single',10)
 
     def testCapturePictureWithSizeWidescreen(self):
         '''
