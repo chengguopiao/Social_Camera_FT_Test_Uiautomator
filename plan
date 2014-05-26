@@ -39,7 +39,7 @@ script.singlecamera.CameraTest.testCaptureSingleImageWithLocationOff = 1
 script.singlecamera.CameraTest.testFrontCaptureSingleImageWithLocationOn = 1
 script.singlecamera.CameraTest.testFrontCaptureSingleImageWithLocationOff = 1
 script.singlecamera.CameraTest.testFrontCaptureSingleImageWithFDFROn = 1
-script.singlecamera.CameraTest.testFrontCaptureSingleImageWithFDFROff = 1#
+script.singlecamera.CameraTest.testFrontCaptureSingleImageWithFDFROff = 1
 
 script.smilecamera.CameraTest.testCaptureSmileImageWithFlashOn = 1
 script.smilecamera.CameraTest.testCaptureSmileImageWithFlashOff = 1
@@ -68,7 +68,7 @@ script.smilecamera.CameraTest.testCaptureSmileImageWithWBIncandescent = 1
 script.smilecamera.CameraTest.testCaptureSmileImageWithWBDaylight = 1
 script.smilecamera.CameraTest.testCaptureSmileImageWithWBFluorescent = 1
 script.smilecamera.CameraTest.testCaptureSmileImageWithWBCloudy = 1
-script.smilecamera.CameraTest.testCaptureSmileImageWithWBCloudy = 1#
+script.smilecamera.CameraTest.testCaptureSmileImageWithWBCloudy = 1
 
 script.continuous.CameraTest.testContinuousCapturePictureWithFlashOn = 1
 script.continuous.CameraTest.testContinuousCapturePictureWithFlashOff= 1
@@ -141,8 +141,8 @@ script.quickswitch.CameraTest.testQuickSwitchtoGallery= 1
 
 script.hdrcapture.CameraTest.testCapturePictureWithFDOn = 1
 script.hdrcapture.CameraTest.testCapturePictureWithFDOff = 1
-#script.hdrcapture.CameraTest.testCapturePictureWithPictureSizeStandard = 1
-#script.hdrcapture.CameraTest.testCaptureWithPictureSizeWidesreen = 1
+script.hdrcapture.CameraTest.testCapturePictureWithPictureSizeStandard = 1
+script.hdrcapture.CameraTest.testCaptureWithPictureSizeWidesreen = 1
 script.hdrcapture.CameraTest.testCapturepictureWithGeoLocationOn = 1
 script.hdrcapture.CameraTest.testCapturepictureWithGeoLocationOff = 1
 script.hdrcapture.CameraTest.testCapturePictureWithSelfTimerOff = 1
