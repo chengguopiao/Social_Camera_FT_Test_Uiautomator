@@ -206,7 +206,7 @@ class CameraTest(unittest.TestCase):
         4.Exit  activity
         """
         # Step 2  Set scene mode Night
-        SM.setCameraSetting('single',5,6)
+        SM.setCameraSetting('single',5,5)
         self._confirmSettingMode('scenemode','night')
         # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
         self._capturePictureAndConfirm(2)
@@ -317,7 +317,7 @@ class CameraTest(unittest.TestCase):
         """
         # Step 2  Set photo size 6M
         SM.setCameraSetting('single',4,1)
-        self._confirmSettingMode('picturesize','WideScreen')
+        self._confirmSettingMode('picture_size','WideScreen')
         # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
         self._capturePictureAndConfirm(2)
 
@@ -332,8 +332,8 @@ class CameraTest(unittest.TestCase):
         4.Exit  activity
         """
         # Step 2  Set photo size 13M
-        SM.setCameraSetting('single',5,2)
-        self._confirmSettingMode('picturesize','StandardScreen')
+        SM.setCameraSetting('single',4,2)
+        self._confirmSettingMode('picture_size','StandardScreen')
         # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
         self._capturePictureAndConfirm(2)
 

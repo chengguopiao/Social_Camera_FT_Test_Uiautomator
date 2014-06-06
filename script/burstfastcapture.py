@@ -73,6 +73,8 @@ class CameraTest(unittest.TestCase):
         AD.cmd('refresh','/sdcard/DCIM/*')
         #Launch social camera
         self._launchCamera()
+        if  d(text = 'OK').wait.exists(timeout = 3000):
+            d(text = 'OK').click.wait()        
         SM.switchcamera('burstfast')
 
     def tearDown(self):
