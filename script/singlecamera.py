@@ -206,7 +206,7 @@ class CameraTest(unittest.TestCase):
         4.Exit  activity
         """
         # Step 2  Set scene mode Night
-        SM.setCameraSetting('single',5,6)
+        SM.setCameraSetting('single',5,5)
         self._confirmSettingMode('scenemode','night')
         # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
         self._capturePictureAndConfirm(2)
