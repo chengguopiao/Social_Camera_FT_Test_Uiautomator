@@ -184,7 +184,7 @@ class CameraTest(unittest.TestCase):
         '''
         SM.setCameraSetting('burst',3,5)
         assert bool(AD.cmd('cat',SCENE_STATE).find('night')+1)
-        self._captureAndCheckPicCount('single',5)
+        self._captureAndCheckPicCount('single',10)
 
     def testCapturePictureWithScenesLandscape(self):
         '''
