@@ -139,14 +139,14 @@
 
 #script.hdrcapture.CameraTest.testCapturePictureWithFDOn = 1
 #script.hdrcapture.CameraTest.testCapturePictureWithFDOff = 1
-script.hdrcapture.CameraTest.testCapturePictureWithPictureSizeStandard = 1
-script.hdrcapture.CameraTest.testCaptureWithPictureSizeWidesreen = 1
-script.hdrcapture.CameraTest.testCapturepictureWithGeoLocationOn = 1
-script.hdrcapture.CameraTest.testCapturepictureWithGeoLocationOff = 1
-script.hdrcapture.CameraTest.testCapturePictureWithSelfTimerOff = 1
-script.hdrcapture.CameraTest.testCapturePictureWithThreeSec = 1
-script.hdrcapture.CameraTest.testCapturePictureWithFiveSec = 1
-script.hdrcapture.CameraTest.testCapturePictureWithTenSec = 1
+#script.hdrcapture.CameraTest.testCapturePictureWithPictureSizeStandard = 1
+#script.hdrcapture.CameraTest.testCaptureWithPictureSizeWidesreen = 1
+#script.hdrcapture.CameraTest.testCapturepictureWithGeoLocationOn = 1
+#script.hdrcapture.CameraTest.testCapturepictureWithGeoLocationOff = 1
+#script.hdrcapture.CameraTest.testCapturePictureWithSelfTimerOff = 1
+#script.hdrcapture.CameraTest.testCapturePictureWithThreeSec = 1
+#script.hdrcapture.CameraTest.testCapturePictureWithFiveSec = 1
+#script.hdrcapture.CameraTest.testCapturePictureWithTenSec = 1
 
 script.videocapture.CameraTest.testRecordVideoWithFlashOn = 1
 script.videocapture.CameraTest.testRecordVideoWithFlashOff = 1
