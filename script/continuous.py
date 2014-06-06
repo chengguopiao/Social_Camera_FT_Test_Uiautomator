@@ -31,6 +31,7 @@ HINTS_KEY ='| grep pref_camera_hints_key'
 TIMER_KEY ='| grep pref_camera_delay_shooting_key'
 WHITEBALANCE ='| grep pref_camera_whitebalance_key'
 FLASH_STATE='| grep pref_camera_flashmode_key'
+DRAWUP_CAPTUREBUTTON='adb shell input swipe 530 1690 530 1600 '
 #################################
 
 PACKAGE_NAME = 'com.intel.camera22'
@@ -640,10 +641,14 @@ class CameraTest(unittest.TestCase):
    
     def _ContinuouCapturePic(self):
         beforeNo = a.cmd('ls','/sdcard/DCIM/100ANDRO') #Get count before capturing
-        tb.takePicture('longclick')
+        self._longclickcapture()
         afterNo = a.cmd('ls','/sdcard/DCIM/100ANDRO') #Get count after taking picture
         if beforeNo == afterNo: #If the count does not raise up after capturing, case failed
             self.fail('Taking picture failed!')
+
+    def _longclickcapture(self):
+        commands.getoutput(DRAWUP_CAPTUREBUTTON + '2000')
+        time.sleep(2) 
 
     def _CapturePic(self):
         beforeNo = a.cmd('ls','/sdcard/DCIM/100ANDRO') #Get count before capturing
