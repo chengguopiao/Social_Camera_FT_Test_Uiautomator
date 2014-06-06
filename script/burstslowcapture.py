@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding:utf-8
 
-from devicewrapper.android import device as d
+from uiautomatorplug.android import device as d
 import unittest
 import commands
 import re
@@ -184,7 +184,7 @@ class CameraTest(unittest.TestCase):
         '''
         SM.setCameraSetting('burst',3,5)
         assert bool(AD.cmd('cat',SCENE_STATE).find('night')+1)
-        self._captureAndCheckPicCount('single',5)
+        self._captureAndCheckPicCount('single',10)
 
     def testCapturePictureWithScenesLandscape(self):
         '''
@@ -223,7 +223,7 @@ class CameraTest(unittest.TestCase):
         '''
         SM.setCameraSetting('burst',3,2)
         assert bool(AD.cmd('cat',SCENE_STATE).find('night-portrait')+1)
-        self._captureAndCheckPicCount('single',5)
+        self._captureAndCheckPicCount('single',10)
 
     def testCapturePictureWithScenesBarcode(self):
         '''
@@ -236,7 +236,7 @@ class CameraTest(unittest.TestCase):
         '''
         SM.setCameraSetting('burst',3,1)
         assert bool(AD.cmd('cat',SCENE_STATE).find('barcode')+1)
-        self._captureAndCheckPicCount('single',5)
+        self._captureAndCheckPicCount('single',10)
 
     def testCapturePictureWithSizeWidescreen(self):
         '''
@@ -248,7 +248,7 @@ class CameraTest(unittest.TestCase):
                 4.Exit  activity
         '''
         SM.setCameraSetting('burst',2,1)
-        assert bool(AD.cmd('cat',SCENE_STATE).find('WideScreen')+1)
+        assert bool(AD.cmd('cat',PICSIZE_STATE).find('WideScreen')+1)
         self._captureAndCheckPicCount('single',5)
 
     def testCapturePictureWithSizeStandard(self):
@@ -261,7 +261,7 @@ class CameraTest(unittest.TestCase):
                 4.Exit  activity
         '''
         SM.setCameraSetting('burst',2,2)
-        assert bool(AD.cmd('cat',SCENE_STATE).find('StandardScreen')+1)
+        assert bool(AD.cmd('cat',PICSIZE_STATE).find('StandardScreen')+1)
         self._captureAndCheckPicCount('single',5)
     
     def testCapturepictureWithGeoLocationOn(self):
@@ -274,7 +274,7 @@ class CameraTest(unittest.TestCase):
                 4.Exit  activity
         '''
         SM.setCameraSetting('burst',1,2)
-        assert bool(AD.cmd('cat',SCENE_STATE).find('on')+1)
+        assert bool(AD.cmd('cat',GEO_STATE).find('on')+1)
         self._captureAndCheckPicCount('single',5)
 
     def testCapturepictureWithGeoLocationOff(self):
@@ -287,7 +287,7 @@ class CameraTest(unittest.TestCase):
                 4.Exit  activity
         '''
         SM.setCameraSetting('burst',1,1)
-        assert bool(AD.cmd('cat',SCENE_STATE).find('off')+1)
+        assert bool(AD.cmd('cat',GEO_STATE).find('off')+1)
         self._captureAndCheckPicCount('single',5)
 
     def _captureAndCheckPicCount(self,capturemode,delaytime):

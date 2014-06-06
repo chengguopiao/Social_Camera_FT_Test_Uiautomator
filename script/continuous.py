@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding:utf-8
 
-from devicewrapper.android import device as d
+from uiautomatorplug.android import device as d
 import commands
 import re
 import subprocess
@@ -19,7 +19,7 @@ tb = util.TouchButton()
 
 # PATH
 PATH ='/data/data/com.intel.camera22/shared_prefs/com.intel.camera22_preferences_0_0.xml '
-PATH1='cat /data/data/com.intel.camera22/shared_prefs/com.intel.camera22_preferences_0.xml '
+PATH1='/data/data/com.intel.camera22/shared_prefs/com.intel.camera22_preferences_0.xml '
 # key
 EXPOSURE_KEY ='| grep pref_camera_exposure_key'
 IOS_KEY='| grep pref_camera_iso_key'
@@ -278,7 +278,6 @@ class CameraTest(unittest.TestCase):
         """
         # step 2
         sm.setCameraSetting('single',5,5)
-        assert bool(a.cmd('cat',PATH + SCENE_KEY).find('night')+1)
         # step 3
         self._ContinuouCapturePic()
 
@@ -338,7 +337,7 @@ class CameraTest(unittest.TestCase):
         """ 
         # step 2
         sm.setCameraSetting('single',3,1)
-        assert bool(a.cmd('cat',PATH + LOCATION_KEY).find('on')+1)
+        assert bool(a.cmd('cat',PATH1 + LOCATION_KEY).find('on')+1)
         # step 3
         self._ContinuouCapturePic()          
 
@@ -352,8 +351,8 @@ class CameraTest(unittest.TestCase):
                 4.Exit  activity
         """
         # step 2
-        sm.setCameraSetting('single',3,2)
-        assert bool(a.cmd('cat',PATH + LOCATION_KEY).find('off')+1)
+        sm.setCameraSetting('single',3,1)
+        assert bool(a.cmd('cat',PATH1 + LOCATION_KEY).find('off')+1)
         # step 3
         self._ContinuouCapturePic()   
 
@@ -411,7 +410,7 @@ class CameraTest(unittest.TestCase):
         sm.setCameraSetting('single',9,2)
         assert bool(a.cmd('cat',PATH + TIMER_KEY).find('3')+1)
         # step 3
-        self._ContinuouCapturePic() 
+        self._CapturePic() 
 
 # Test case 25
     def testContinuousCapturepictureWithSelfTimerFiveSec(self):
@@ -425,7 +424,7 @@ class CameraTest(unittest.TestCase):
         sm.setCameraSetting('single',9,3)
         assert bool(a.cmd('cat',PATH + TIMER_KEY).find('5')+1)
         # step 3
-        self._ContinuouCapturePic() 
+        self._CapturePic() 
 
 # Test case 26
     def testContinuousCapturepictureWithSelfTimerTenSec(self):
@@ -439,7 +438,7 @@ class CameraTest(unittest.TestCase):
         sm.setCameraSetting('single',9,4)
         assert bool(a.cmd('cat',PATH + TIMER_KEY).find('10')+1)
         # step 3
-        self._ContinuouCapturePic() 
+        self._CapturePic() 
 
 # Test case 27
     def testContinuousCapturepictureWithISOAuto(self):
@@ -563,7 +562,7 @@ class CameraTest(unittest.TestCase):
                 4.Exit  activity
         """
         sm.setCameraSetting('single',7,2)
-        assert bool(a.cmd('cat',PATH + WHITEBALANCE).find('daylight')+1)
+        assert bool(a.cmd('cat',PATH + WHITEBALANCE).find('fluorescent')+1)
         # step 3
         self._ContinuouCapturePic() 
 
@@ -590,13 +589,14 @@ class CameraTest(unittest.TestCase):
                 3.Touch shutter button to capture picture
                 4.Exit  activity
         """
-        sm.setCameraSetting('single','fdfr','off')
+        tb.switchBackOrFrontCamera('front')
+        sm.setCameraSetting('fsingle','fdfr','off')
         assert bool(a.cmd('cat',PATH1 + FDFR_KEY).find('off')+1)
         # step 3
         self._ContinuouCapturePic() 
 
 # Test case 38
-    def testCapturePictureWithFDON(self):
+    def testFrontCapturePictureWithFDON(self):
         """
         Summary:testCapturePictureWithFDON: Take a picture with set FD/FR on
         Steps:  1.Launch single capture activity
@@ -604,7 +604,8 @@ class CameraTest(unittest.TestCase):
                 3.Touch shutter button to capture picture
                 4.Exit  activity
         """
-        sm.setCameraSetting('single','fdfr','on')
+        tb.switchBackOrFrontCamera('front')
+        sm.setCameraSetting('fsingle','fdfr','on')
         assert bool(a.cmd('cat',PATH1 + FDFR_KEY).find('on')+1)
         # step 3
         self._ContinuouCapturePic() 
@@ -619,7 +620,7 @@ class CameraTest(unittest.TestCase):
                 4.Exit  activity
         """ 
         sm.setCameraSetting('single',3,2)
-        assert bool(a.cmd('cat',PATH + LOCATION_KEY).find('on')+1)
+        assert bool(a.cmd('cat',PATH1 + LOCATION_KEY).find('on')+1)
         # step 3
         self._ContinuouCapturePic() 
 
@@ -633,7 +634,7 @@ class CameraTest(unittest.TestCase):
                 4.Exit  activity
         """
         sm.setCameraSetting('single',3,1)
-        assert bool(a.cmd('cat',PATH + LOCATION_KEY).find('off')+1)
+        assert bool(a.cmd('cat',PATH1 + LOCATION_KEY).find('off')+1)
         # step 3
         self._ContinuouCapturePic() 
 
@@ -644,10 +645,20 @@ class CameraTest(unittest.TestCase):
         afterNo = a.cmd('ls','/sdcard/DCIM/100ANDRO') #Get count after taking picture
         if beforeNo == afterNo: #If the count does not raise up after capturing, case failed
             self.fail('Taking picture failed!')
-        
+
     def _longclickcapture(self):
         commands.getoutput(DRAWUP_CAPTUREBUTTON + '2000')
         time.sleep(2) 
+
+    def _CapturePic(self):
+        beforeNo = a.cmd('ls','/sdcard/DCIM/100ANDRO') #Get count before capturing
+        tb.takePicture('single')
+        time.sleep(10)
+        afterNo = a.cmd('ls','/sdcard/DCIM/100ANDRO') #Get count after taking picture
+        if beforeNo == afterNo: #If the count does not raise up after capturing, case failed
+            self.fail('Taking picture failed!')
+
+
 
     def _launchCamera(self):
         d.start_activity(component = ACTIVITY_NAME)

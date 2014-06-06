@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-from devicewrapper.android import device as d
+#from uiautomatorplug.android import device as d
+from uiautomatorplug.android import device as d
 import time
 import unittest
 import commands
@@ -9,7 +10,6 @@ import string
 A  = util.Adb()
 SM = util.SetMode()
 TB = util.TouchButton()
-
 
 class CameraTest(unittest.TestCase):
 
@@ -24,8 +24,7 @@ class CameraTest(unittest.TestCase):
         time.sleep(2)
         if  d(text = 'OK').wait.exists(timeout = 3000):
             d(text = 'OK').click.wait()
-        else:
-            assert d(resourceId = 'com.intel.camera22:id/shutter_button'),'Launch camera failed!!'
+        assert d(resourceId = 'com.intel.camera22:id/shutter_button'),'Launch camera failed!!'
 
 
     def tearDown(self):
@@ -592,6 +591,108 @@ class CameraTest(unittest.TestCase):
         self._confirmSettingMode('whitebalance','cloudy')
         # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
         self._capturePictureAndConfirm()  
+
+    # Testcase 36
+    def testCaptureSingleImageWithLocationOn(self):
+        """
+        Summary:Capture image with Geo location on.
+        Step:
+        1.Launch single capture activity
+        2.Set location on.
+        3.Touch shutter button to capture picture
+        4.Exit  activity
+        """
+        # Step 2 
+        SM.setCameraSetting('single',3,2)
+        self._confirmSettingMode('location','on')
+        # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
+        self._capturePictureAndConfirm()
+
+    # Testcase 37
+    def testCaptureSingleImageWithLocationOff(self):
+        """
+        Summary:Capture image with Geo location off.
+        Step:
+        1.Launch single capture activity
+        2.Set location off.
+        3.Touch shutter button to capture picture
+        4.Exit  activity
+        """
+        # Step 2 
+        SM.setCameraSetting('single',3,1)
+        self._confirmSettingMode('location','off')
+        # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
+        self._capturePictureAndConfirm()
+
+    # Testcase 38
+    def testFrontCaptureSingleImageWithLocationOn(self):
+        """
+        Summary:Capture image with Geo location on front camera.
+        Step:
+        1.Launch single capture activity
+        3.Switch to front camera
+        3.Set location on.
+        4.Touch shutter button to capture picture
+        5.Exit  activity
+        """
+        TB.switchBackOrFrontCamera('front')
+        # Step 2 
+        SM.setCameraSetting('fsingle',1,2)
+        self._confirmSettingMode('location','on')
+        # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
+        self._capturePictureAndConfirm()
+
+    # Testcase 39
+    def testFrontCaptureSingleImageWithLocationOff(self):
+        """
+        Summary:Capture image with Geo location off front camera.
+        Step:
+        1.Launch single capture activity
+        3.Switch to front camera
+        3.Set location off.
+        4.Touch shutter button to capture picture
+        5.Exit  activity
+        """
+        TB.switchBackOrFrontCamera('front')
+        # Step 2
+        SM.setCameraSetting('fsingle',1,1)
+        self._confirmSettingMode('location','off')
+        # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
+        self._capturePictureAndConfirm()
+
+    # Testcase 40
+    def testFrontCaptureSingleImageWithFDFROn(self):
+        """
+        Summary:Capture image with FD/FR on front camera.
+        Step:
+        1.Launch single capture activity
+        3.Switch to front camera
+        3.Set FD/FR on.
+        4.Touch shutter button to capture picture
+        5.Exit  activity
+        """
+        TB.switchBackOrFrontCamera('front')
+        # Step 2
+        SM.setCameraSetting('fsingle','fdfr','on')
+        # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
+        self._capturePictureAndConfirm()
+
+    # Testcase 41
+    def testFrontCaptureSingleImageWithFDFROff(self):
+        """
+        Summary:Capture image with FD/FR off front camera.
+        Step:
+        1.Launch single capture activity
+        3.Switch to front camera
+        3.Set FD/FR off.
+        4.Touch shutter button to capture picture
+        5.Exit  activity
+        """
+        TB.switchBackOrFrontCamera('front')
+        # Step 2
+        SM.setCameraSetting('fsingle','fdfr','off')
+        # Step 3 Touch shutter button to capture picture and confirm picture count + 1.
+        self._capturePictureAndConfirm()
 
     def _pressBack(self,touchtimes):
         for i in range(1,touchtimes+1):

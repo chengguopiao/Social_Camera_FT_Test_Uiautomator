@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding:utf-8
 
-from devicewrapper.android import device as d
+from uiautomatorplug.android import device as d
 import commands
 import re
 import subprocess
@@ -225,6 +225,7 @@ class SetMode():
         d(resourceId = 'com.intel.camera22:id/hori_list_button')[FLASH_SETTING.index(option)].click.wait()
 
     def _setFDFRMode(self,option):
+        d(resourceId = 'com.intel.camera22:id/left_menus_face_tracking').click()
         FDFRStatus = commands.getoutput('adb shell cat /data/data/com.intel.camera22/shared_prefs/com.intel.camera22_preferences_0.xml | grep pref_fdfr_key')
         if FDFRStatus.find(option) == -1:
             d(resourceId = 'com.intel.camera22:id/left_menus_face_tracking').click()
@@ -289,15 +290,18 @@ class TouchButton():
 
 
 
-    def takeVideo(self,status):
+    def takeVideo(self,status,capturetimes=0):
         # Start record video
         d(resourceId = CPTUREBUTTON_RESOURCEID).click.wait() 
-        # Set recording time
-        time.sleep(status - 2)
-        #Stop record video
+        for i in range(0,capturetimes):
+            #Tap on the center of the screen to capture image during taking video
+            d(resourceId = 'com.intel.camera22:id/camera_preview').click.wait()
+        # Set recording time, every capturing during record video takes about 3s
+        time.sleep(status - capturetimes*3 -2)
+        # Stop record video
         d(resourceId = CPTUREBUTTON_RESOURCEID).click.wait() 
         return True
-
+        
     def switchBackOrFrontCamera(self,status):
         #Dictionary
         camerastatus = {'back': '0','front':'1'}  

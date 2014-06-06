@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding:utf-8
 
-from devicewrapper.android import device as d
+from uiautomatorplug.android import device as d
 import commands
 import re
 import subprocess
@@ -19,6 +19,7 @@ tb = util.TouchButton()
 
 # PATH
 PATH ='/data/data/com.intel.camera22/shared_prefs/com.intel.camera22_preferences_0_0.xml '
+PATH1='cat /data/data/com.intel.camera22/shared_prefs/com.intel.camera22_preferences_0.xml '
 # key
 EXPOSURE_KEY ='| grep pref_camera_exposure_key'
 IOS_KEY='| grep pref_camera_iso_key'
@@ -45,17 +46,12 @@ class CameraTest(unittest.TestCase):
         else:
             assert d(resourceId = 'com.intel.camera22:id/shutter_button'),'Launch camera failed!!'
         sm.switchcamera('panorama')
-        time.sleep(1)
-        d.expect('panorama.png')    
-
 
     def tearDown(self):
         super(CameraTest,self).tearDown()
         #4.Exit  activity
         self._pressBack(4)
         a.cmd('pm','com.intel.camera22')
-
-
 
 ### Panorama capture 12 ###
 # Test case 1
@@ -87,7 +83,7 @@ class CameraTest(unittest.TestCase):
 
         # step 2
         sm.setCameraSetting('panorama',2,4)
-        assert bool((a.cmd('cat',PATH + EXPOSURE_KEY).find('3')+1)
+        assert bool(a.cmd('cat',PATH + EXPOSURE_KEY).find('3')+1)
         # step 4~5
         self._PanoramaCapturePic()
 
@@ -154,7 +150,7 @@ class CameraTest(unittest.TestCase):
 
         # step 2
         sm.setCameraSetting('panorama',1,2)
-        assert bool(a.cmd('cat',PATH + LOCATION_KEY).find('on')+1)
+        assert bool(a.cmd('cat',PATH1 + LOCATION_KEY).find('on')+1)
         # step 3
         self._PanoramaCapturePic() 
 
@@ -171,7 +167,7 @@ class CameraTest(unittest.TestCase):
 
         # step 2
         sm.setCameraSetting('panorama',1,1)
-        assert bool(a.cmd('cat',PATH + LOCATION_KEY).find('off')+1)
+        assert bool(a.cmd('cat',PATH1 + LOCATION_KEY).find('off')+1)
         # step 3
         self._PanoramaCapturePic() 
 
